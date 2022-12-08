@@ -6,7 +6,7 @@ const App = () => {
         <AppStyled className='App'>
             <h1>React Github Pages</h1>
             <p>
-                Another change
+                Another change 2
             </p>
         </AppStyled>
     );
