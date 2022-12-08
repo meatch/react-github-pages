@@ -1,70 +1,61 @@
-# Getting Started with Create React App
+# CRA and Github Pages
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+The ability to leverage Github to serve up a create react app. Driver for this is teaching students and leveraging a free resource.
 
-In the project directory, you can run:
+This supports
 
-### `npm start`
+- Create React App
+- React Router Dom (using HashRouter)
+- Tested with Open Source API call
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Todo
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Test with personal api call
+- Build out CRA app for class fully featured to ensure nothing breaks
 
-### `npm test`
+## What makes this work? ...gh-pages package
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+This package will build and deploy your app to a separate branch on your github repo called gh-pages. This appears to be a standard/default for Git Hub Pages. See your Github repo Settings > Pages section.
 
-### `npm run build`
+### package.json changes
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The following to NPM commands are added to you package json
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```json
+{
+    "scripts": {
+        "predeploy": "npm run build",
+        "deploy": "git push origin master && gh-pages -d build"
+        // + the rest of your commands
+    }
+}
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Add homepage matching your github pages repo replacing {{USERNAME}} with your github user, and {{REPO-NAME}} witih the github repo you created
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```json
+{
+    "homepage": "https://{{USERNAME}}.github.io/{{REPO-NAME}}"
+    // the rest of your package.json config
+}
+```
 
 ### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Your repo commits do not actually need to be pushed for the deployment to work. However, to keep things in sync I recc the following
 
-### `npm run build` fails to minify
+1. `git add .`
+2. `git commit -m "Your commit message"`
+3. `git push origin master`
+4. `npm run deploy` (this is what build and deploys your chaanges to gh-pages)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## React Router Dom
+
+In order for CRA to work with a subfolder structure you have a couple of options.
+
+1. Simplest = use `HashRouter` instead of `BrowserRouter`
+2. You can change the `basename` of your `BrowserRouter` to match your `/{{REPO-NAME}}`. This makes it more challenging for local development, as it will be inconsistent. There may be some convoluted ways to make both work, but `HashRouter` works out of the box no changes.
+    - React Router Dom < 6 `<BrowserRouter basename="who/users">` [docs](https://v5.reactrouter.com/web/api/BrowserRouter/basename-string)
+    - React Router Dom >= 6 `<Routes basename="who/users">` [undocumented](https://github.com/remix-run/react-router/issues/7128#issuecomment-582591472)
