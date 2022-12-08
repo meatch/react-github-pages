@@ -17,6 +17,8 @@ This supports
 
 ## What makes this work? ...gh-pages package
 
+<https://www.npmjs.com/package/gh-pages>
+
 This package will build and deploy your app to a separate branch on your github repo called gh-pages. This appears to be a standard/default for Git Hub Pages. See your Github repo Settings > Pages section.
 
 ### package.json changes
