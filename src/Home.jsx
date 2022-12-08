@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const Home = () => {
     return (
         <HomeStyled className='Home'>
-            Home
+            <h2>Home</h2>
         </HomeStyled>
     );
 }

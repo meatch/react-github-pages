@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const About = () => {
     return (
         <AboutStyled className='About'>
-            About
+            <h2>About</h2>
         </AboutStyled>
     );
 }

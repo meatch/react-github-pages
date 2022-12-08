@@ -4,6 +4,7 @@ import { HashRouter, Routes, Route, NavLink } from 'react-router-dom';
 
 import Home from './Home';
 import About from './About';
+import Api from './Api';
 
 const App = () => {
     return (
@@ -18,11 +19,13 @@ const App = () => {
                     <ul>
                         <li><NavLink to=''>Home</NavLink></li>
                         <li><NavLink to='/about'>About</NavLink></li>
+                        <li><NavLink to='/api'>Api Call</NavLink></li>
                     </ul>
                 </nav>
                 <Routes>
                     <Route element={ <Home /> } path='' />
                     <Route element={ <About /> } path='/about' />
+                    <Route element={ <Api /> } path='/api' />
                 </Routes>
             </HashRouter>
         </AppStyled>
