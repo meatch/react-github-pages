@@ -10,11 +10,6 @@ This supports
 - React Router Dom (using HashRouter)
 - Tested with Open Source API call
 
-## Todo
-
-- Test with personal api call
-- Build out CRA app for class fully featured to ensure nothing breaks
-
 ## What makes this work? ...gh-pages package
 
 <https://www.npmjs.com/package/gh-pages>
@@ -61,3 +56,22 @@ In order for CRA to work with a subfolder structure you have a couple of options
 2. You can change the `basename` of your `BrowserRouter` to match your `/{{REPO-NAME}}`. This makes it more challenging for local development, as it will be inconsistent. There may be some convoluted ways to make both work, but `HashRouter` works out of the box no changes.
     - React Router Dom < 6 `<BrowserRouter basename="who/users">` [docs](https://v5.reactrouter.com/web/api/BrowserRouter/basename-string)
     - React Router Dom >= 6 `<Routes basename="who/users">` [undocumented](https://github.com/remix-run/react-router/issues/7128#issuecomment-582591472)
+
+## Vite Images
+
+Images cannot be root relative strings, they must be React direct imports.
+
+```js
+import imgSrc from './images/somefile.jpg';
+```
+
+### Add to Vite config
+
+```js
+const viteConfig = {
+   build: {
+       outDir: './build',
+   },
+   base: '/{{REPO-NAME}}/',
+}
+```
